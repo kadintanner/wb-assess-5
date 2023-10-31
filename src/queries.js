@@ -80,6 +80,17 @@ export async function printHumansAndAnimals() {
 // with animals of the given species.
 export async function getHumansByAnimalSpecies(species) {
     const humans = new Set()
-    
-    humans.add(humanName)
+    const animal = await animal.findAll({
+        where: {
+            species: species
+        },
+        include: [Human]
+    })
+    animal.forEach(animal => {
+        if (animal.Human) {
+            const humanName = Human.name.fullName
+            humans.add(humanName)
+        }
+    })
+    return humans
 }
